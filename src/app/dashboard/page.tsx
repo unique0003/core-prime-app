@@ -16,8 +16,8 @@ export default async function DashboardPage() {
   // 2. คำนวณสถิติภาพรวม (Analytics Logic)
   const totalWorkouts = logs.length;
   // เติม : number ให้กับ sum เพื่อแก้ Error Type
-  const totalVolume = logs.reduce((sum: number, log) => sum + log.volumeScore, 0);
-  const totalSets = logs.reduce((sum: number, log) => sum + log.sets, 0);
+const totalVolume = logs.reduce<number>((sum, log) => sum + log.volumeScore, 0);
+const totalSets = logs.reduce<number>((sum, log) => sum + log.sets, 0);
 
   // 3. จัดกลุ่มข้อมูลสำหรับทำกราฟรายวัน (รวม Volume Score ของแต่ละวันเข้าด้วยกัน)
   const chartDataMap = new Map<string, number>();
