@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link"; // เพิ่ม Import Link สำหรับไปหน้า Dashboard
 import { saveWorkoutLog } from "./actions/workout";
 
 type Phase = "idle" | "ready" | "squeeze" | "rest" | "break" | "finished";
@@ -118,7 +119,12 @@ export default function CorePrimeApp() {
     return (
       <main className="min-h-screen bg-slate-900 flex flex-col items-center p-6 text-slate-100">
         <h1 className="text-3xl font-extrabold mt-10 mb-2 bg-gradient-to-r from-orange-400 to-rose-500 bg-clip-text text-transparent">CorePrime</h1>
-        <p className="text-slate-400 mb-10 text-center">เลือกระบบปฏิบัติการของร่างกายคุณ</p>
+        <p className="text-slate-400 mb-6 text-center">เลือกระบบปฏิบัติการของร่างกายคุณ</p>
+
+        {/* --- ปุ่มไปหน้าสถิติ --- */}
+        <Link href="/dashboard" className="mb-8 w-full max-w-md px-6 py-4 bg-white/5 border border-white/10 hover:border-orange-500 rounded-2xl text-sm font-bold transition-all text-orange-400 flex justify-center items-center gap-2">
+          📊 ดูสรุปผลพัฒนาการของฉัน
+        </Link>
         
         <div className="w-full max-w-md space-y-4">
           <button onClick={() => selectExercise("Kegel")} className="w-full p-6 bg-slate-800 rounded-2xl border border-slate-700 hover:border-orange-500 transition-all text-left group">
@@ -143,13 +149,14 @@ export default function CorePrimeApp() {
     <main className={`min-h-screen flex flex-col items-center justify-center p-4 transition-colors duration-700 ease-in-out ${getPhaseStyles()}`}>
       <div className="absolute top-6 left-6">
         {phase === "idle" && (
-          <button onClick={() => setExercise(null)} className="text-sm font-bold bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm">
+          <button onClick={() => setExercise(null)} className="text-sm font-bold bg-white/20 px-4 py-2 rounded-full">
             ← กลับ
           </button>
         )}
       </div>
 
-      <div className="w-full max-w-md p-8 rounded-3xl shadow-2xl bg-slate-900/40 backdrop-blur-md border border-white/10">
+      {/* ปรับพื้นหลังให้โปร่งใสแบบไม่มี Blur */}
+      <div className="w-full max-w-md p-8 rounded-3xl shadow-2xl bg-slate-900/60 border border-white/10">
         <h2 className="text-2xl font-bold text-center mb-6">{exercise} Tracker</h2>
 
         {phase === "idle" && (
