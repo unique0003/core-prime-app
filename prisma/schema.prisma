@@ -1,0 +1,21 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+ 
+}
+
+// ออกแบบให้เรียบง่ายสำหรับการเริ่มต้น
+model WorkoutLog {
+  id           String   @id @default(uuid())
+  userId       String   @default("guest-user") // สำหรับทดสอบ
+  exerciseName String   // เช่น "Kegel", "Plank", "Glute Bridge"
+  sets         Int      @default(1)
+  reps         Int?     
+  holdTimeSec  Int?     
+  volumeScore  Float    
+  date         DateTime @default(now())
+}
